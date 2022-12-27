@@ -5,11 +5,6 @@ from tkinter import messagebox
 from utils import *
 from pygame import mixer
 
-# data.append(cur_data)
-filename = r"C:\Users\Davon\Desktop\University\Semester 3\Lab on Python for Data Science and Machine Learning\Final Project\audio\Major_2.wav"
-mixer.init()
-mixer.music.load(filename)
-
 colors = [
     (0, 0, 0),
     (120, 37, 179),
@@ -135,12 +130,12 @@ song_names.set_index('Index')
 
 
 
-p1 = Game(225, 50)
-p2 = Game(975, 50)
+p1 = Game(125, 50)
+p2 = Game(675, 50)
 
 counter = 0
 fps = 60
-zoom = 28
+zoom = 20
 done = False
 music_played = False
 
@@ -149,7 +144,7 @@ mixer.music.set_volume(0.2)
 pygame.init()
 pygame.display.set_caption("Tetris")
 clock = pygame.time.Clock()
-screen = pygame.display.set_mode((1500, 800))
+screen = pygame.display.set_mode((1000, 600))
 row, name, scale = get_song(val_data, song_names)
 
 while not done:
@@ -220,8 +215,6 @@ while not done:
                     p2.key_guess = -1
                     music_played = False
         
-    
-            
     screen.fill(WHITE)
 
     for i in range(game_h):
@@ -261,7 +254,8 @@ while not done:
     text = font.render("Score: " + str(p1.score), True, BLACK)
     text2 = font.render("Score: " + str(p2.score), True, BLACK)
     
-
+    major_minor = font.render("Major" if scale == 1 else "Minor", True, BLACK)
+    screen.blit(major_minor, [450, 500])
     screen.blit(text, [p1.x-100, p1.y-50])
     screen.blit(text2, [p2.x-100, p2.y-50])
     if p1.state == "gameover" or p2.state == "gameover":
